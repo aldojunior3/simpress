@@ -1,0 +1,69 @@
+﻿@model TestePratico.Models.Produto
+@{
+    ViewBag.Title = "Edita Produto";
+}
+
+<h1>Editar Produto</h1>
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    @Html.HiddenFor(m => m.Id)
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Nome, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Nome, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Descricao, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Descricao, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Descricao, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Categoria.Nome, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.CategoriaID,
+                                    new SelectList(ViewBag.Categorias, "id", "Nome"),
+                                   "Categoria", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.CategoriaID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Ativo, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input id="ativo" name="ativo" type="checkbox" value="true" @(Model.Ativo ? "checked=\"checked\"" : "") />
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Perecivel, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input id="perecivel" name="perecivel" type="checkbox" value="true" @(Model.Perecivel ? "checked=\"checked\"" : "") />
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Salvar alterações" class="btn btn-success" />
+            @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger" })
+        </div>
+    </div>
+</div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

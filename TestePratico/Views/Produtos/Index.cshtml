@@ -1,0 +1,50 @@
+﻿@model IEnumerable<TestePratico.Models.Produto>
+@{
+    ViewBag.Title = "Index";
+}
+<h2>Produtos</h2>
+<p class="col-md-8"></p>
+<p class="col-md-4">
+    @Html.ActionLink("Cadastrar", "Create", "Produtos", new { @class = "btn btn-primary" })
+</p>
+<table class="table table-striped">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Id)</th>
+        <th>@Html.DisplayNameFor(model => model.Nome) </th>
+        <th>@Html.DisplayNameFor(model => model.Descricao)</th>
+        <th>@Html.DisplayNameFor(model => model.Categoria.Nome)</th>
+        <th>@Html.DisplayNameFor(model => model.Ativo)</th>
+        <th>@Html.DisplayNameFor(model => model.Perecivel)</th>
+        <th>Ação</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>@Html.DisplayFor(modelItem => item.Id)</td>
+    <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+    <td>@Html.DisplayFor(modelItem => item.Descricao)</td>
+    <td>@Html.DisplayFor(modelItem => item.Categoria.Nome)</td>
+    @if (item.Ativo == true)
+    {
+        <td>Ativo</td>
+    }
+    else
+    {
+        <td>Não</td>
+    }
+    @if (item.Perecivel == true)
+    {
+        <td>Ativo</td>
+    }
+    else
+    {
+        <td>Não</td>
+    }
+
+    <td>
+        @Html.ActionLink("Atualizar", "Edit", new { id = item.Id }, new { @class = "btn btn-success" })
+        @Html.ActionLink("Deletar", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+    </td>
+</tr>
+    }
+</table>
